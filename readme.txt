@@ -4,7 +4,7 @@ Tags: shortcodes, embeds, communications
 Requires at least: 6.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ No. Most shortcodes render remote embeds or remote scripts from external service
 Yes. The plugin has been simplified into a single runtime PHP file for easier review and maintenance.
 
 == Changelog ==
+
+= 2.1.6 =
+
+* Changed the update checker to use the plugin's actual installed folder as the update slug.
+* Prevented WordPress from showing `Install Now` when the installed folder is not `iam-shortcodes`.
 
 = 2.1.5 =
 

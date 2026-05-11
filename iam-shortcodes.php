@@ -15,7 +15,7 @@
  * Plugin Name:       Embed Shortcode Toolkit
  * Plugin URI:        https://github.com/jcjason12108-alt/Embed-Shortcode-Toolkit
  * Description:        Library of shortcode embeds to help populate your website.
- * Version:           2.1.5
+ * Version:           2.1.6
  * Requires at least: 6.0
  * Tested up to:      6.9.4
  * Requires PHP:      7.4
@@ -31,12 +31,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$embed_shortcode_toolkit_plugin_file = plugin_basename( __FILE__ );
+$embed_shortcode_toolkit_plugin_slug = dirname( $embed_shortcode_toolkit_plugin_file );
+
+if ( '.' === $embed_shortcode_toolkit_plugin_slug ) {
+	$embed_shortcode_toolkit_plugin_slug = basename( $embed_shortcode_toolkit_plugin_file, '.php' );
+}
+
 require_once __DIR__ . '/plugin-update-checker/plugin-update-checker.php';
 
 $embed_shortcode_toolkit_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
 	'https://github.com/jcjason12108-alt/Embed-Shortcode-Toolkit/',
 	__FILE__,
-	'iam-shortcodes'
+	$embed_shortcode_toolkit_plugin_slug
 );
 $embed_shortcode_toolkit_update_checker->setBranch( 'main' );
 
