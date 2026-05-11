@@ -9,21 +9,21 @@
  *
  * @link:       https://www.iamdivpress.org
  * @since             1.0.1
- * @package           Iam_Shortcodes_For_Communicators
+ * @package           Embed_Shortcode_Toolkit
  *
  * @wordpress-plugin
  * Plugin Name:       Embed Shortcode Toolkit
  * Plugin URI:        https://github.com/jcjason12108-alt/Embed-Shortcode-Toolkit
- * Description:        Library of IAM Specific shortcodes to help populate your website. The release 1.0.6 now has a shortcode selector on the main editor.  It also list ALL shortocdes installed on your site.  All IAM Shortocdes are listed with IAM in the name. A big thank you @frogerme and @scottdeluzio for your code work, and to Joe Jackman from IAM Local 1202 for helping with this project.  <a href="https://iamdivpress.org/developer/documents/iam-shortcode-instructions.html" target="_blank">List of Shortcodes & Uses</a>.
- * Version:           2.1.3
+ * Description:        Library of shortcode embeds to help populate your website.
+ * Version:           2.1.4
  * Requires at least: 6.0
  * Tested up to:      6.9.4
  * Requires PHP:      7.4
  * Author:            Jason Cox
  * Author URI:        https://github.com/jcjason12108-alt
  * License:           GPLv2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       iam-shortcodes
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       embed-shortcode-toolkit
  * Domain Path:       /lang
 */
 
@@ -33,32 +33,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once __DIR__ . '/plugin-update-checker/plugin-update-checker.php';
 
-$iam_shortcodes_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+$embed_shortcode_toolkit_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
 	'https://github.com/jcjason12108-alt/Embed-Shortcode-Toolkit',
 	__FILE__,
-	'iam-shortcodes'
+	'embed-shortcode-toolkit'
 );
-$iam_shortcodes_update_checker->setBranch( 'main' );
+$embed_shortcode_toolkit_update_checker->setBranch( 'main' );
 
 add_filter(
-	$iam_shortcodes_update_checker->getUniqueName( 'vcs_update_detection_strategies' ),
+	$embed_shortcode_toolkit_update_checker->getUniqueName( 'vcs_update_detection_strategies' ),
 	static function ( array $strategies ): array {
 		return isset( $strategies['branch'] ) ? array( 'branch' => $strategies['branch'] ) : $strategies;
 	}
 );
 
-$iam_shortcodes_github_token = defined( 'IAM_SHORTCODES_GITHUB_TOKEN' )
-	? IAM_SHORTCODES_GITHUB_TOKEN
-	: getenv( 'IAM_SHORTCODES_GITHUB_TOKEN' );
+$embed_shortcode_toolkit_github_token = defined( 'EMBED_SHORTCODE_TOOLKIT_GITHUB_TOKEN' )
+	? EMBED_SHORTCODE_TOOLKIT_GITHUB_TOKEN
+	: ( defined( 'IAM_SHORTCODES_GITHUB_TOKEN' ) ? IAM_SHORTCODES_GITHUB_TOKEN : getenv( 'EMBED_SHORTCODE_TOOLKIT_GITHUB_TOKEN' ) );
 
-if ( empty( $iam_shortcodes_github_token ) ) {
-	$iam_shortcodes_github_token = defined( 'PLUGIN_UPDATE_GITHUB_TOKEN' )
+if ( empty( $embed_shortcode_toolkit_github_token ) ) {
+	$embed_shortcode_toolkit_github_token = defined( 'PLUGIN_UPDATE_GITHUB_TOKEN' )
 		? PLUGIN_UPDATE_GITHUB_TOKEN
 		: getenv( 'PLUGIN_UPDATE_GITHUB_TOKEN' );
 }
 
-if ( ! empty( $iam_shortcodes_github_token ) ) {
-	$iam_shortcodes_update_checker->setAuthentication( $iam_shortcodes_github_token );
+if ( ! empty( $embed_shortcode_toolkit_github_token ) ) {
+	$embed_shortcode_toolkit_update_checker->setAuthentication( $embed_shortcode_toolkit_github_token );
 }
 
 function iamuapolicy_iframe( $atts, $content ) {
@@ -142,7 +142,7 @@ add_shortcode('IAMSOCIALWALL', 'iam_socalwall_iframe');
 --------------------------------------------- */
 add_action('plugins_loaded', 'shortcode_lister_load_textdomain');
 function shortcode_lister_load_textdomain() {
-	load_plugin_textdomain( 'iam-shortcodes', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	load_plugin_textdomain( 'embed-shortcode-toolkit', false, dirname( plugin_basename(__FILE__) ) . '/lang/' );
 }
 
 /*
@@ -221,12 +221,12 @@ function shortcode_lister_menu( $location ) {
 }
 
 function shortcode_lister_admin_settings_setup() {
-	add_options_page( __( 'Shortcode Lister', 'iam-shortcodes' ), __( 'Shortcode Lister', 'iam-shortcodes' ), 'manage_options', 'shortcode-lister-settings', 'shortcode_lister_admin_settings_page' );
+	add_options_page( __( 'Shortcode Lister', 'embed-shortcode-toolkit' ), __( 'Shortcode Lister', 'embed-shortcode-toolkit' ), 'manage_options', 'shortcode-lister-settings', 'shortcode_lister_admin_settings_page' );
 }
 
 function shortcode_lister_add_action_links( $links ) {
 	$mylinks = array(
-		'<a href="' . esc_url( admin_url( 'options-general.php?page=shortcode-lister-settings' ) ) . '">' . esc_html__( 'Settings', 'iam-shortcodes' ) . '</a>',
+		'<a href="' . esc_url( admin_url( 'options-general.php?page=shortcode-lister-settings' ) ) . '">' . esc_html__( 'Settings', 'embed-shortcode-toolkit' ) . '</a>',
 	);
 
 	return array_merge( $links, $mylinks );
@@ -236,7 +236,7 @@ function shortcode_lister_admin_settings_page() {
 	global $shortcode_lister_active_tab;
 
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'You do not have permission to access this page.', 'iam-shortcodes' ) );
+		wp_die( esc_html__( 'You do not have permission to access this page.', 'embed-shortcode-toolkit' ) );
 	}
 
 	$shortcode_lister_active_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'welcome';
@@ -251,7 +251,7 @@ function shortcode_lister_admin_settings_page() {
 function shortcode_lister_welcome_tab() {
 	global $shortcode_lister_active_tab;
 	?>
-	<a class="nav-tab <?php echo ( 'welcome' === $shortcode_lister_active_tab ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( 'options-general.php?page=shortcode-lister-settings&tab=welcome' ) ); ?>"><?php esc_html_e( 'Shortcode Lister', 'iam-shortcodes' ); ?></a>
+	<a class="nav-tab <?php echo ( 'welcome' === $shortcode_lister_active_tab ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( 'options-general.php?page=shortcode-lister-settings&tab=welcome' ) ); ?>"><?php esc_html_e( 'Shortcode Lister', 'embed-shortcode-toolkit' ); ?></a>
 	<?php
 }
 
@@ -262,22 +262,22 @@ function shortcode_lister_welcome_render_options_page() {
 		return;
 	}
 	?>
-	<h3><?php esc_html_e( 'Shortcode Lister Settings', 'iam-shortcodes' ); ?></h3>
-	<p><?php esc_html_e( 'Exclude shortcodes from the shortcode listing menu by checking the box next to each shortcode below. This is useful if there are shortcodes you only use once so your list of shortcodes does not become overloaded with unnecessary shortcodes.', 'iam-shortcodes' ); ?></p>
+	<h3><?php esc_html_e( 'Shortcode Lister Settings', 'embed-shortcode-toolkit' ); ?></h3>
+	<p><?php esc_html_e( 'Exclude shortcodes from the shortcode listing menu by checking the box next to each shortcode below. This is useful if there are shortcodes you only use once so your list of shortcodes does not become overloaded with unnecessary shortcodes.', 'embed-shortcode-toolkit' ); ?></p>
 	<form method="post" action="options.php">
 		<?php settings_fields( 'shortcode_lister_settings_group' ); ?>
 		<table class="form-table">
 			<tbody>
 				<tr valign="top">
 					<th scope="row" valign="top">
-						<?php esc_html_e( 'Shortcode', 'iam-shortcodes' ); ?>
+						<?php esc_html_e( 'Shortcode', 'embed-shortcode-toolkit' ); ?>
 					</th>
 				</tr>
 				<?php shortcode_lister_menu( 'settings' ); ?>
 			</tbody>
 		</table>
 		<p class="submit">
-			<input type="submit" class="button-primary" value="<?php echo esc_attr__( 'Save Options', 'iam-shortcodes' ); ?>" />
+			<input type="submit" class="button-primary" value="<?php echo esc_attr__( 'Save Options', 'embed-shortcode-toolkit' ); ?>" />
 		</p>
 	</form>
 	<?php

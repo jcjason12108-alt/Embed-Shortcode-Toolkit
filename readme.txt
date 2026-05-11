@@ -1,18 +1,18 @@
 === Embed Shortcode Toolkit ===
 Contributors: jasoncox
-Tags: shortcodes, iam, embeds
+Tags: shortcodes, embeds, communications
 Requires at least: 6.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-IAM-related shortcodes for WordPress sites that need quick access to common IAM embeds and feeds.
+Shortcodes for WordPress sites that need quick access to common embeds and feeds.
 
 == Description ==
 
-IAM Shortcodes for Communicators provides a small library of shortcode-based embeds for IAM-related content.
+Embed Shortcode Toolkit provides a small library of shortcode-based embeds for communication and media content.
 
 Included shortcodes:
 
