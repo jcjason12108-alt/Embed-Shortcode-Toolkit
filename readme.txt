@@ -4,7 +4,7 @@ Tags: shortcodes, embeds, communications
 Requires at least: 6.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,7 @@ Important:
 == Installation ==
 
 1. Upload the plugin folder to `/wp-content/plugins/`.
-2. Activate `IAM Shortcodes for Communicators` in WordPress.
+2. Activate `Embed Shortcode Toolkit` in WordPress.
 3. Add any supported shortcode to a post, page, or widget area.
 4. Optional: go to `Settings > Shortcode Lister` to hide shortcodes from the editor dropdown.
 
@@ -58,6 +58,11 @@ No. Most shortcodes render remote embeds or remote scripts from external service
 Yes. The plugin has been simplified into a single runtime PHP file for easier review and maintenance.
 
 == Changelog ==
+
+= 2.1.5 =
+
+* Restored the update checker slug to `iam-shortcodes` so GitHub updates match existing installs in `wp-content/plugins/iam-shortcodes/`.
+* Corrected the installation instructions to use the current plugin name.
 
 = 2.1.3 =
 
