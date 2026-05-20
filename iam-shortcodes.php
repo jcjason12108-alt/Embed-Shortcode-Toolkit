@@ -15,7 +15,7 @@
  * Plugin Name:       Embed Shortcode Toolkit
  * Plugin URI:        https://github.com/jcjason12108-alt/Embed-Shortcode-Toolkit
  * Description:        Library of shortcode embeds to help populate your website.
- * Version:           2.1.6
+ * Version:           2.1.7
  * Requires at least: 6.0
  * Tested up to: 7.0
  * Requires PHP:      7.4
