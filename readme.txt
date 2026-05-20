@@ -2,7 +2,7 @@
 Contributors: jasoncox
 Tags: shortcodes, embeds, communications
 Requires at least: 6.0
-Tested up to: 6.9.4
+Tested up to: 7.0
 Requires PHP: 7.4
 Stable tag: 2.1.6
 License: GPLv2 or later
