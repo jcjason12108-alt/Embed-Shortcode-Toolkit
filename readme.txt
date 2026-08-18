@@ -4,7 +4,7 @@ Tags: shortcodes, embeds, communications
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,18 @@ No. Most shortcodes render remote embeds or remote scripts from external service
 Yes. The plugin has been simplified into a single runtime PHP file for easier review and maintenance.
 
 == Changelog ==
+
+= 2.1.8 =
+
+* Updated the bundled Plugin Update Checker library to the stable 5.7 release.
+* Replaced the unavailable `[IAMTERMS]` source with IAM's current privacy and user agreement page.
+* Limited the classic-editor shortcode selector script to post editing screens.
+* Tightened escaping and comparison handling and applied WordPress coding-standard cleanup.
+
+= 2.1.7 =
+
+* Confirmed compatibility with WordPress 7.0 and PHP 7.4 or newer.
+* Added function guards and hardened settings sanitization and admin output.
 
 = 2.1.6 =
 

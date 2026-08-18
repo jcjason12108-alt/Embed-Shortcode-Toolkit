@@ -15,7 +15,7 @@
  * Plugin Name:       Embed Shortcode Toolkit
  * Plugin URI:        https://github.com/jcjason12108-alt/Embed-Shortcode-Toolkit
  * Description:        Library of shortcode embeds to help populate your website.
- * Version:           2.1.7
+ * Version:           2.1.8
  * Requires at least: 6.0
  * Tested up to: 7.0
  * Requires PHP:      7.4
@@ -68,8 +68,14 @@ if ( ! empty( $embed_shortcode_toolkit_github_token ) ) {
 	$embed_shortcode_toolkit_update_checker->setAuthentication( $embed_shortcode_toolkit_github_token );
 }
 
+/*
+ * Several legacy embed providers require their script or stylesheet tags to remain in the
+ * shortcode output. These URLs are fixed by the plugin and cannot be supplied by a user.
+ *
+ * phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedScript, WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+ */
 if ( ! function_exists( 'iamuapolicy_iframe' ) ) {
-	function iamuapolicy_iframe( $atts, $content ) {
+	function iamuapolicy_iframe( $atts ) {
 		$atts = shortcode_atts(
 			array(
 				'width'  => '100%',
@@ -80,48 +86,48 @@ if ( ! function_exists( 'iamuapolicy_iframe' ) ) {
 		);
 
 		return sprintf(
-			'<html><iframe src="https://iamdivpress.org/developer/documents/iam-privacy-user.html" style="border:0px #ffffff none;" name="policy" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" height="%1$s" width="%2$s" allowfullscreen></iframe></html>',
+			'<html><iframe src="https://www.goiam.org/privacy/" style="border:0px #ffffff none;" name="policy" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" height="%1$s" width="%2$s" allowfullscreen></iframe></html>',
 			esc_attr( $atts['height'] ),
 			esc_attr( $atts['width'] )
 		);
 	}
 }
-add_shortcode('IAMTERMS', 'iamuapolicy_iframe');
+add_shortcode( 'IAMTERMS', 'iamuapolicy_iframe' );
 
 if ( ! function_exists( 'iamyotuube_iframe' ) ) {
 	function iamyotuube_iframe() {
 		return '<html><iframe src="https://www.youtube.com/embed/videoseries?list=PLJ6SJCpDBWOoNBD9OmIEGqWC-IKlyKmJX" style="border:0px #ffffff none;" name="youtube" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="480px" width="100%" allowfullscreen></iframe></html>';
 	}
 }
-add_shortcode('IAMYOUTUBE', 'iamyotuube_iframe');
+add_shortcode( 'IAMYOUTUBE', 'iamyotuube_iframe' );
 
 if ( ! function_exists( 'iamtimeline_iframe' ) ) {
 	function iamtimeline_iframe() {
 		return '<html><iframe src="https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1OaD8UoynArcs1EUIrGPHEo0OCQ11rsDb2KJHqmXhMAQ&amp;font=Default&amp;lang=en&amp;hash_bookmark=true&amp;initial_zoom=2&amp;height=650" width="100%" height="650" frameborder="0"></iframe></html>';
 	}
 }
-add_shortcode('IAMTIMELINE', 'iamtimeline_iframe');
+add_shortcode( 'IAMTIMELINE', 'iamtimeline_iframe' );
 
 if ( ! function_exists( 'imailpage_iframe' ) ) {
 	function imailpage_iframe() {
 		return '<html><!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="104692/"></script> <!-- end feedwind code --></html>';
 	}
 }
-add_shortcode('IMAILPAGE', 'imailpage_iframe');
+add_shortcode( 'IMAILPAGE', 'imailpage_iframe' );
 
 if ( ! function_exists( 'imailwidget_iframe' ) ) {
 	function imailwidget_iframe() {
 		return '<html><!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="105005/"></script> <!-- end feedwind code --></html>';
 	}
 }
-add_shortcode('IMAILWIDGET', 'imailwidget_iframe');
+add_shortcode( 'IMAILWIDGET', 'imailwidget_iframe' );
 
 if ( ! function_exists( 'legislativenews_iframe' ) ) {
 	function legislativenews_iframe() {
 		return '<html><!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="104694/"></script> <!-- end feedwind code --></html>';
 	}
 }
-add_shortcode('LEGISLATIVENEWS', 'legislativenews_iframe');
+add_shortcode( 'LEGISLATIVENEWS', 'legislativenews_iframe' );
 
 if ( ! function_exists( 'organizingform_iframe' ) ) {
 	function organizingform_iframe() {
@@ -129,35 +135,35 @@ if ( ! function_exists( 'organizingform_iframe' ) ) {
 <script src="https://www.goiam.org/wp-content/plugins/gravity-forms-iframe-develop/assets/scripts/gfembed.min.js" type="text/javascript"></script></html>';
 	}
 }
-add_shortcode('ORGANIZINGFORM', 'organizingform_iframe');
+add_shortcode( 'ORGANIZINGFORM', 'organizingform_iframe' );
 
 if ( ! function_exists( 'journalbookcase_iframe' ) ) {
 	function journalbookcase_iframe() {
 		return '<html><iframe src="https://fliphtml5.com/bookcase/lkxz" style="border:0px #ffffff none;" name="journal-bookcase" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="600px" width="100%" allowfullscreen></iframe></html>';
 	}
 }
-add_shortcode('JOURNALBOOKCASE', 'journalbookcase_iframe');
+add_shortcode( 'JOURNALBOOKCASE', 'journalbookcase_iframe' );
 
 if ( ! function_exists( 'legislativeactioncenter_iframe' ) ) {
 	function legislativeactioncenter_iframe() {
 		return '<html><iframe src="https://www.goiam.org/forms/action-center-for-communications-plugin/#/" style="border:0px #ffffff none;" name="actioncenter" scrolling="auto" frameborder="0" marginheight="0px" marginwidth="0px" height="960px" width="100%" allowfullscreen></iframe></html>';
 	}
 }
-add_shortcode('ACTIONCENTER', 'legislativeactioncenter_iframe');
+add_shortcode( 'ACTIONCENTER', 'legislativeactioncenter_iframe' );
 
 if ( ! function_exists( 'iamcalendar_iframe' ) ) {
 	function iamcalendar_iframe() {
 		return '<html><!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="104736/"></script> <!-- end feedwind code --></html>';
 	}
 }
-add_shortcode('IAMCALENDAR', 'iamcalendar_iframe');
+add_shortcode( 'IAMCALENDAR', 'iamcalendar_iframe' );
 
 if ( ! function_exists( 'activatelive_podcast_iframe' ) ) {
 	function activatelive_podcast_iframe() {
 		return '<html><!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="105698/"></script> <!-- end feedwind code --></html>';
 	}
 }
-add_shortcode('ACTIVATELIVEPODCAST', 'activatelive_podcast_iframe');
+add_shortcode( 'ACTIVATELIVEPODCAST', 'activatelive_podcast_iframe' );
 
 if ( ! function_exists( 'iam_socalwall_iframe' ) ) {
 	function iam_socalwall_iframe() {
@@ -166,15 +172,16 @@ if ( ! function_exists( 'iam_socalwall_iframe' ) ) {
 <ul class="juicer-feed" data-feed-id="iamaw"></ul></html>';
 	}
 }
-add_shortcode('IAMSOCIALWALL', 'iam_socalwall_iframe');
+add_shortcode( 'IAMSOCIALWALL', 'iam_socalwall_iframe' );
+// phpcs:enable WordPress.WP.EnqueuedResources.NonEnqueuedScript, WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 
 
 /* Load text domain
 --------------------------------------------- */
-add_action('plugins_loaded', 'shortcode_lister_load_textdomain');
+add_action( 'plugins_loaded', 'shortcode_lister_load_textdomain' );
 if ( ! function_exists( 'shortcode_lister_load_textdomain' ) ) {
 	function shortcode_lister_load_textdomain() {
-		load_plugin_textdomain( 'embed-shortcode-toolkit', false, dirname( plugin_basename(__FILE__) ) . '/lang/' );
+		load_plugin_textdomain( 'embed-shortcode-toolkit', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 }
 
@@ -192,7 +199,11 @@ if ( is_admin() ) {
 }
 
 if ( ! function_exists( 'shortcode_lister_scripts' ) ) {
-	function shortcode_lister_scripts() {
+	function shortcode_lister_scripts( $hook_suffix ) {
+		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) ) {
+			return;
+		}
+
 		wp_enqueue_script( 'jquery' );
 		wp_add_inline_script(
 			'jquery',
@@ -220,7 +231,13 @@ if ( ! function_exists( 'shortcode_lister_menu' ) ) {
 					?>
 					<tr valign="top">
 						<td>
-							<input id="shortcode_lister_settings[<?php echo esc_attr( $code ); ?>]" name="shortcode_lister_settings[<?php echo esc_attr( $code ); ?>]" type="checkbox" value="1" <?php if ( is_array( $shortcode_lister_settings ) && array_key_exists( $code, $shortcode_lister_settings ) ) { checked( 1, $shortcode_lister_settings[ $code ] ); } ?> />
+							<input
+								id="shortcode_lister_settings[<?php echo esc_attr( $code ); ?>]"
+								name="shortcode_lister_settings[<?php echo esc_attr( $code ); ?>]"
+								type="checkbox"
+								value="1"
+								<?php checked( is_array( $shortcode_lister_settings ) && array_key_exists( $code, $shortcode_lister_settings ) ); ?>
+							/>
 							<label class="description" for="shortcode_lister_settings[<?php echo esc_attr( $code ); ?>]">[<?php echo esc_html( $code ); ?>]</label>
 						</td>
 					</tr>
@@ -229,10 +246,8 @@ if ( ! function_exists( 'shortcode_lister_menu' ) ) {
 				break;
 
 			default:
-				$shortcodes_list = '';
-
 				foreach ( $shortcode_tags as $code => $function ) {
-					if ( is_array( $shortcode_lister_settings ) && array_key_exists( $code, $shortcode_lister_settings ) && 1 == $shortcode_lister_settings[ $code ] ) {
+					if ( is_array( $shortcode_lister_settings ) && array_key_exists( $code, $shortcode_lister_settings ) && 1 === (int) $shortcode_lister_settings[ $code ] ) {
 						continue;
 					}
 
@@ -242,10 +257,13 @@ if ( ! function_exists( 'shortcode_lister_menu' ) ) {
 				echo '&nbsp;<select id="sl_select"><option class="noclick">Shortcodes</option>';
 
 				foreach ( $includes as $include ) {
-					$shortcodes_list .= '<option value="' . esc_attr( $include ) . '">' . esc_html( $include ) . '</option>';
+					printf(
+						'<option value="%1$s">%2$s</option>',
+						esc_attr( $include ),
+						esc_html( $include )
+					);
 				}
 
-				echo $shortcodes_list;
 				echo '</select>';
 				break;
 		}
@@ -276,6 +294,8 @@ if ( ! function_exists( 'shortcode_lister_admin_settings_page' ) ) {
 			wp_die( esc_html__( 'You do not have permission to access this page.', 'embed-shortcode-toolkit' ) );
 		}
 
+		// This read-only parameter only selects visible settings content; it does not change state.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$shortcode_lister_active_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'welcome';
 		?>
 		<h2 class="nav-tab-wrapper">
